@@ -1,0 +1,175 @@
+# ShadowWall AI Configuration
+
+# Application settings
+app:
+  name: "ShadowWall AI"
+  version: "1.0.0"
+  debug: false
+  host: "0.0.0.0"
+  port: 8080
+  workers: 4
+
+# Network monitoring
+network:
+  interfaces:
+    - "eth0"
+    - "wlan0"
+  capture_buffer_size: 65536
+  packet_timeout: 1.0
+  promiscuous_mode: true
+  
+# Machine Learning models
+ml:
+  models_path: "models/"
+  threat_detection:
+    model_type: "ensemble"
+    update_interval: 3600  # seconds
+    confidence_threshold: 0.75
+    retrain_interval: 86400  # 24 hours
+  
+  behavioral_analysis:
+    window_size: 300  # 5 minutes
+    anomaly_threshold: 2.5
+    learning_rate: 0.001
+
+# Honeypot configuration
+honeypots:
+  enabled: true
+  auto_deploy: true
+  max_instances: 10
+  services:
+    - ssh
+    - http
+    - ftp
+    - telnet
+    - smtp
+  
+  adaptive:
+    enabled: true
+    learning_window: 3600
+    update_frequency: 300
+
+# Threat intelligence
+threat_intel:
+  feeds:
+    - name: "internal"
+      url: "file://data/threat_feeds/internal.json"
+      update_interval: 300
+    - name: "misp"
+      url: "${MISP_URL}/attributes/restSearch"
+      api_key: "${MISP_API_KEY}"
+      update_interval: 3600
+  
+  ioc_storage:
+    backend: "elasticsearch"
+    retention_days: 90
+
+# Database configuration
+database:
+  url: "sqlite:///data/shadowwall.db"
+  echo: false
+  pool_size: 10
+  max_overflow: 20
+
+# Redis configuration
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: null
+  ssl: false
+
+# Elasticsearch configuration
+elasticsearch:
+  hosts:
+    - "localhost:9200"
+  index_prefix: "shadowwall"
+  retention_days: 30
+
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "json"
+  file: "logs/shadowwall.log"
+  max_file_size: "100MB"
+  backup_count: 5
+
+# Security settings
+security:
+  api_key: "${SHADOWWALL_API_KEY}"
+  jwt_secret: "${JWT_SECRET}"
+  cors_origins:
+    - "http://localhost:3000"
+    - "http://localhost:8080"
+  
+  rate_limiting:
+    enabled: true
+    requests_per_minute: 100
+
+# Dashboard configuration
+dashboard:
+  enabled: true
+  host: "0.0.0.0"
+  port: 8081
+  refresh_interval: 5  # seconds
+  max_events_displayed: 1000
+  websocket_enabled: true
+  advanced_features: true
+  ai_analytics: true
+  real_time_updates: true
+  
+# Alerting
+alerts:
+  enabled: true
+  channels:
+    - type: "email"
+      smtp_server: "${SMTP_SERVER}"
+      smtp_port: 587
+      username: "${SMTP_USERNAME}"
+      password: "${SMTP_PASSWORD}"
+      recipients:
+        - "admin@company.com"
+    
+    - type: "webhook"
+      url: "${WEBHOOK_URL}"
+      headers:
+        Authorization: "Bearer ${WEBHOOK_TOKEN}"
+
+# Sandbox configuration
+sandbox:
+  enabled: true
+  max_concurrent_sessions: 5
+  session_timeout: 3600  # 1 hour
+  
+  environments:
+    basic_network:
+      description: "Basic network environment with vulnerable services"
+      services: ["web", "ssh", "ftp"]
+      network_size: 24
+    
+    corporate_sim:
+      description: "Simulated corporate network environment"
+      services: ["web", "ssh", "database", "file_server", "email"]
+      network_size: 16
+      
+    iot_environment:
+      description: "IoT device simulation environment"
+      services: ["http", "telnet", "upnp", "mqtt"]
+      network_size: 28
+      
+    cloud_infrastructure:
+      description: "Cloud infrastructure simulation"
+      services: ["web", "api", "database", "storage"]
+      network_size: 20
+
+# Performance tuning
+performance:
+  max_memory_usage: "1GB"
+  cpu_limit: 80  # percentage
+  disk_cache_size: "500MB"
+  
+  async_workers:
+    network_monitor: 4
+    ml_processor: 2
+    honeypot_manager: 2
+    threat_analyzer: 3

@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  shadowwall-ai:
+    build: .
+    container_name: shadowwall-ai
+    ports:
+      - "8080:8080"
+    environment:
+      - SHADOWWALL_CONFIG=/app/config/config.yaml
+      - REDIS_URL=redis://redis:6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    volumes:
+      - ./config:/app/config
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./models:/app/models
+    depends_on:
+      - redis
+      - elasticsearch
+    networks:
+      - shadowwall-network
+    restart: unless-stopped
+    privileged: true  # Required for network monitoring
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+
+  redis:
+    image: redis:7-alpine
+    container_name: shadowwall-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - shadowwall-network
+    restart: unless-stopped
+
+  elasticsearch:
+    image: elasticsearch:8.11.0
+    container_name: shadowwall-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - shadowwall-network
+    restart: unless-stopped
+
+  kibana:
+    image: kibana:8.11.0
+    container_name: shadowwall-kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    networks:
+      - shadowwall-network
+    restart: unless-stopped
+
+  honeypot-manager:
+    build: 
+      context: .
+      dockerfile: Dockerfile.honeypot
+    container_name: shadowwall-honeypots
+    network_mode: host
+    volumes:
+      - ./config:/app/config
+      - ./data/honeypots:/app/data
+    depends_on:
+      - shadowwall-ai
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+  elasticsearch_data:
+
+networks:
+  shadowwall-network:
+    driver: bridge

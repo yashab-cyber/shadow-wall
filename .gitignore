@@ -1,0 +1,136 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Environment variables
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ShadowWall AI Specific
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# ML Models (regenerated on startup)
+models/*.pkl
+models/*.joblib
+models/*.h5
+data/models/*.pkl
+data/models/*.joblib
+data/models/*.h5
+
+# Logs (runtime generated)
+logs/*.log
+logs/*.txt
+logs/**/*.log
+logs/**/*.txt
+
+# Temporary files
+temp/*
+!temp/README.md
+
+# Captures and data (sensitive)
+data/captures/*.pcap
+data/captures/*.pcapng
+data/honeypots/*.log
+data/honeypots/**/*.log
+data/sandbox/samples/*
+data/threat_intel/feeds/*
+
+# Exports (generated files)
+exports/*.pdf
+exports/*.csv
+exports/*.json
+exports/*.xml
+exports/*.zip
+
+# Backups (sensitive)
+backups/*.db
+backups/*.tar.gz
+backups/*.zip
+
+# Config files with secrets
+config/secrets.yaml
+config/production.yaml
+config/*.key
+config/*.pem
+config/*.crt
+
+# Reports (may contain sensitive data)
+data/reports/**/*.pdf
+data/reports/**/*.html
+
+# Cache directories
+.cache/
+.npm/
+.yarn/
+
+# Local development
+local_config.yaml
+debug.log
+test_data/

@@ -729,7 +729,7 @@ ShadowWall AI is an open-source project developed by passionate security researc
 <td align="center">
 
 **💼 Professional**
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Yashab%20Alam-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/yashabalam)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Yashab%20Alam-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/yashab-alam)
 
 </td>
 <td align="center">

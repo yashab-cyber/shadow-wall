@@ -14,7 +14,7 @@ Thank you to all the amazing people who have contributed to ShadowWall AI! This 
 <b>Yashab Alam</b><br />
 <sub>Project Creator & Lead</sub><br />
 <a href="https://github.com/yashab-cyber">🔗</a> 
-<a href="https://www.linkedin.com/in/yashabalam">💼</a>
+<a href="https://www.linkedin.com/in/yashab-alam">💼</a>
 <a href="https://www.instagram.com/yashab.alam">📸</a><br />
 <small>🛡️ Core Architecture • 🤖 ML Engine • 📊 Dashboard • 🔒 Security</small>
 </td>
